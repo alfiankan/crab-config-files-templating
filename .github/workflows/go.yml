@@ -37,5 +37,5 @@ jobs:
         goarch: ${{ matrix.goarch }}
         goversion: "https://dl.google.com/go/go1.18.linux-amd64.tar.gz"
         project_path: "./cmd"
-        binary_name: "crab-cli"
+        binary_name: "crab"
         extra_files: LICENSE README.md
