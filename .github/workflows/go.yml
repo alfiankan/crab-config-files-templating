@@ -1,0 +1,30 @@
+name: Generate release-artifacts
+
+on:
+  release:
+    types: 
+        - created
+
+jobs:
+  build:
+    runs-on: ubuntu
+    steps:
+    - uses: actions/checkout@v3
+    - name: Test
+      run: make test
+  generate:
+    name: Generate cross-platform builds
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+      - name: Generate build files
+        uses: thatisuday/go-cross-build@v1
+        with:
+            platforms: 'linux/amd64, linux/arm, linux/386, darwin/amd64, darwin/arm64, windows/amd64, windows/amd64, windows/386'
+            package: ''
+            name: 'crab-cli'
+            compress: 'false'
+            dest: 'prebuilt'
+            
+            
