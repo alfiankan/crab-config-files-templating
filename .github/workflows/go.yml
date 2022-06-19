@@ -6,13 +6,14 @@ on:
         - created
 
 jobs:
-  build:
-    runs-on: ubuntu
+  test:
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - name: Test
       run: make test
   generate:
+    needs: test
     name: Generate cross-platform builds
     runs-on: ubuntu-latest
     steps:
@@ -21,7 +22,7 @@ jobs:
       - name: Generate build files
         uses: thatisuday/go-cross-build@v1
         with:
-            platforms: 'linux/amd64, linux/arm, linux/386, darwin/amd64, darwin/arm64, windows/amd64, windows/amd64, windows/386'
+            platforms: 'linux/amd64, darwin/amd64, windows/amd64'
             package: ''
             name: 'crab-cli'
             compress: 'false'
