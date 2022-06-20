@@ -2,6 +2,7 @@
 Dynamic configuration file templating tool for kubernetes manifest or general configuration files
 
 [![codecov](https://codecov.io/gh/alfiankan/crab-config-files-templating/branch/master/graph/badge.svg?token=DJHuZmbYeU)](https://codecov.io/gh/alfiankan/crab-config-files-templating)
+[![Go Reference](https://pkg.go.dev/badge/github.com/alfiankan/crab-config-files-templating.svg)](https://pkg.go.dev/github.com/alfiankan/crab-config-files-templating)
 
 ## How to install
 Download according to your computer architecture at release page [go to release page](https://github.com/alfiankan/crab-config-files-templating/releases)
