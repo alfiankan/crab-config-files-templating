@@ -1,4 +1,5 @@
 # Crab 🦀
+![Coverage](https://img.shields.io/badge/Coverage-0.0%25-red)
 Dynamic configuration file templating tool for kubernetes manifest or general configuration files
 
 ## How to install
