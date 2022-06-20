@@ -99,6 +99,12 @@ spec:
         name: nginxhttp
         port: 8081
 ```
+Click to watch the demo :
+[![asciicast](https://asciinema.org/a/E76kRn2G8uoIXBm6KZPtPn27x.svg)](https://asciinema.org/a/E76kRn2G8uoIXBm6KZPtPn27x)
+
+Youtube demo video :
+- [go to youtube](https://youtu.be/HdRQ3mz64us)
+
   
 ### Case 2 Quotes replace
 sometimes your config file needs string quotes, (like for env vars or connection string):
