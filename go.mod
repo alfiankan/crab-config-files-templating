@@ -2,7 +2,7 @@ module github.com/alfiankan/crab-config-files-templating
 
 go 1.18
 
-replace example.com/greetings => ../crab-config-files-templating
+replace github.com/alfiankan/crab-config-files-templating => ../crab-config-files-templating
 
 require (
 	github.com/spf13/cobra v1.4.0
