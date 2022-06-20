@@ -25,18 +25,19 @@ func NewReplacer(inputPath, outputPath string, dryRun bool) *Replacer {
 	}
 }
 
-func (rep *Replacer) readFile() (string, error) {
+func (rep *Replacer) ReadFile() (string, error) {
 	content, err := os.ReadFile(rep.inputPath)
 	return string(content), err
 }
 
 func (rep *Replacer) Run(kv []ReplacableKV, verbose bool) error {
 
-	content, err := rep.readFile()
+	content, err := rep.ReadFile()
 	if err != nil {
 		return err
 	}
 
+	// subtituting Key Value replacing template {{templateName}}
 	for _, rk := range kv {
 		v := strings.Split(rk.KV, "=")
 		newValue := v[1]

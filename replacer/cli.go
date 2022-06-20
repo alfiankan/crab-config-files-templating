@@ -6,11 +6,13 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// color TUI
 const (
 	GREEN_TEMPLATE = "\033[1;32m%s\033[0m"
 	RED_TEMPLATE   = "\033[1;31m%s\033[0m"
 )
 
+// main cli command
 func RootCLI() *cobra.Command {
 	var replaceKV []string
 	var replaceWithStringKV []string
@@ -18,8 +20,8 @@ func RootCLI() *cobra.Command {
 
 	rootCmd := &cobra.Command{
 		Use:   "crab",
-		Short: "Crab 🦀 Config File Replacer",
-		Long:  `Replacing Config File Using Template`,
+		Short: "Crab CLI config files templating",
+		Long:  `Crab CLI Dynamic configuration file templating tool for kubernetes manifest or general configuration files`,
 		Run: func(cmd *cobra.Command, args []string) {
 
 			inputFilePath, errFlag := cmd.Flags().GetString("file")
@@ -58,10 +60,10 @@ func RootCLI() *cobra.Command {
 		},
 	}
 
+	// set flag input
 	rootCmd.Flags().StringP("file", "f", "", "Input File Path")
 	rootCmd.Flags().StringP("output", "o", "", "Output File Path")
 	rootCmd.Flags().BoolP("verbose", "v", false, "Verbose process")
-
 	rootCmd.Flags().StringSliceVarP(&replaceKV, "replace", "r", []string{}, "key value replacable eg. -r namespace=default")
 	rootCmd.Flags().StringSliceVarP(&replaceWithStringKV, "quotes", "q", []string{}, "replace including quotes eg. -q url=http://domain.com result 'http://domain.com'")
 
