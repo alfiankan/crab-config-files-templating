@@ -1,0 +1,2 @@
+- Please use issue template
+- Please wait for maintener accept issue or you can assign to your self then create new pull request will be nice too.
