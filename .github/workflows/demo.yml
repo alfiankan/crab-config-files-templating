@@ -21,7 +21,15 @@ jobs:
           wget https://github.com/alfiankan/crab-config-files-templating/releases/download/v1.0.5/crab-v1.0.5-linux-amd64.tar.gz && \
           tar -xf crab-v1.0.5-linux-amd64.tar.gz crab
       - name: recreate deployment manifest on test
-        run: ./crab -h
+        run: |
+          ./crab -f example/manifest/nginx.yaml \
+          -r namespace=test \
+          -q publishPort=8000 \
+          -q portName=test-server \
+          -o nginx-test.yaml \
+          -v
+      - name: view manifest
+        run: cat nginx-test.yaml
                     
   
   deploy-production:
@@ -30,4 +38,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: install crab cli
-        run: uname
+        run: |
+          wget https://github.com/alfiankan/crab-config-files-templating/releases/download/v1.0.5/crab-v1.0.5-linux-amd64.tar.gz && \
+          tar -xf crab-v1.0.5-linux-amd64.tar.gz crab
+      - name: recreate deployment manifest on production
+        run: |
+          ./crab -f example/manifest/nginx.yaml \
+          -r namespace=production \
+          -q publishPort=80 \
+          -q portName=prod-server \
+          -o nginx-prod.yaml \
+          -v
+      - name: view manifest
+        run: cat nginx-prod.yaml
