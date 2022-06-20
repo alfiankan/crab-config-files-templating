@@ -2,8 +2,6 @@ module github.com/alfiankan/crab-config-files-templating
 
 go 1.18
 
-replace github.com/alfiankan/crab-config-files-templating => ../crab-config-files-templating
-
 require (
 	github.com/spf13/cobra v1.4.0
 	github.com/stretchr/testify v1.7.2

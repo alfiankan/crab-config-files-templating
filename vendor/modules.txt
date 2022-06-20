@@ -19,4 +19,3 @@ github.com/stretchr/testify/assert
 # gopkg.in/yaml.v3 v3.0.1
 ## explicit
 gopkg.in/yaml.v3
-# github.com/alfiankan/crab-config-files-templating => ../crab-config-files-templating
