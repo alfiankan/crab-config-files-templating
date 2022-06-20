@@ -139,5 +139,5 @@ spec:
 ```
 
 ## Related article
-- Replacing kubernetes manifest value dynamicly (coming soon)
+- Replacing kubernetes manifest value dynamicly (coming soon on medium)
 
