@@ -7,7 +7,9 @@ Dynamic configuration file templating tool for kubernetes manifest or general co
 [![Generate release-artifacts](https://github.com/alfiankan/crab-config-files-templating/actions/workflows/go.yml/badge.svg?branch=v1.0.5)](https://github.com/alfiankan/crab-config-files-templating/actions/workflows/go.yml)
 
 ## How to install
+
 Download according to your computer architecture at release page [go to release page](https://github.com/alfiankan/crab-config-files-templating/releases)
+
 | OS        | Platform           | Status  |
 | ------------- |:-------------:| -----:|
 | Ubuntu, Debian | amd64, arm64, 386| available |
