@@ -17,7 +17,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: install crab cli
-        run: uname
+        run: |
+          wget https://github.com/alfiankan/crab-config-files-templating/releases/download/v1.0.5/crab-v1.0.5-linux-amd64.tar.gz && \
+          mkdir crab && \
+          tar -xzf crab-v1.0.5-linux-amd64.tar.gz -C crab && \
+          cp ./crab/crab .
+      - name: recreate deployment manifest on test
+        run: ./crab -h
+                    
   
   deploy-production:
     runs-on: ubuntu-latest
