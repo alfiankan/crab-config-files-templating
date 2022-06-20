@@ -18,8 +18,8 @@ func TestReplace(t *testing.T) {
 		Quotes: true,
 	})
 	replacer := NewReplacer(
-		"../nginx-deployment.yaml",
-		"../out.yaml",
+		"nginx-deployment.yaml",
+		"out.yaml",
 		true,
 	)
 

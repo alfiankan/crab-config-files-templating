@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: nginx
+    namespace: {{namespace}}
+spec:
+    replicas: 2
+    selector:
+      matchLabels:
+        app: nginx
+    strategy:
+        type: RollingUpdate
+        rollingUpdate:
+          maxSurge: 50%
+          maxUnavailable: 50%
+    template:
+      metadata:
+        labels:
+          app: nginx
+      spec:
+        containers:
+          - name: nginx
+            image: docker.io/nginx:latest
+            imagePullPolicy: "Always"
+            ports:
+              - containerPort: 80
+            env:
+              - name: TRACE_URL
+                value: {{traceUrl}}
+              - name:
+                value: {{authUrl}}
+            resources:
+              requests:
+                cpu: '0'
+                memory: '0'
+              limits:
+                cpu: '256'
+                memory: 11400G
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: nginx
+    namespace: {{namespace}}
+spec:
+    ports:
+      - targetPort: 80
+        name: nginxhttp
+        port: {{exposePort}}
+    selector:
+      app: nginx
+
