@@ -1,4 +1,4 @@
-module config-replacer
+module github.com/alfiankan/crab-config-files-templating
 
 go 1.18
 

@@ -1,8 +1,9 @@
 package main
 
 import (
-	"config-replacer/replacer"
 	"fmt"
+
+	"github.com/alfiankan/crab-config-files-templating/replacer"
 )
 
 func main() {
