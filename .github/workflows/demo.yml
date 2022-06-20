@@ -24,7 +24,7 @@ jobs:
         run: |
           ./crab -f example/manifest/nginx.yaml \
           -r namespace=test \
-          -q publishPort=8000 \
+          -r publishPort=8000 \
           -q portName=test-server \
           -o nginx-test.yaml \
           -v
@@ -45,7 +45,7 @@ jobs:
         run: |
           ./crab -f example/manifest/nginx.yaml \
           -r namespace=production \
-          -q publishPort=80 \
+          -r publishPort=80 \
           -q portName=prod-server \
           -o nginx-prod.yaml \
           -v
