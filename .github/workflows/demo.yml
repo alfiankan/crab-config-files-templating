@@ -19,7 +19,7 @@ jobs:
       - name: install crab cli
         run: |
           wget https://github.com/alfiankan/crab-config-files-templating/releases/download/v1.0.5/crab-v1.0.5-linux-amd64.tar.gz && \
-          mkdir crab && \
+          mkdir ./crab && \
           tar -xzf crab-v1.0.5-linux-amd64.tar.gz -C crab && \
           cp ./crab/crab .
       - name: recreate deployment manifest on test
