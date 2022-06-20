@@ -43,7 +43,7 @@ Flags :
 
 ### Case 1 Standart replace
 First add {{replacableName}} to your file :
-```
+```yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -55,7 +55,7 @@ spec:
         name: nginxhttp
         port: {{exposePort}}
 ```
-crab cli will replace {{replacableName}} as key, base on example above :
+crab cli will replace {{replacableName}} as the key, based on the example above :
 - {{namespace}}
 - {{exposePort}}
 
@@ -63,7 +63,7 @@ then run crab command :
 ```bash
   crab -f inputfile.yaml -r namespace=production -r exposePort=8081
 ```
-yass you can replace multiple key value ✔️
+yes you can override multiple key values  ✔️
   
 write output to another file add -o flag:
 ```bash
@@ -74,17 +74,34 @@ to make verbose add -v flag:
 ```bash
   crab -f inputfile.yaml -r namespace=production -r exposePort=8081 -o result.yaml -v
 ```
+verbose output :
+```bash
+[REPLACED] from namespace to production
+[REPLACED] from exposePort to 8081
+[DONE] Crab output result at result.yaml
+```
 
 the result will be :
-
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+    name: nginx
+    namespace: production
+spec:
+    ports:
+      - targetPort: 80
+        name: nginxhttp
+        port: 8081
+```
   
 ### Case 2 Quotes replace
-sometimes your config file needs string quotes :  
+sometimes your config file needs string quotes, (like for env vars or connection string):
   ```sh
-    baseUrl="http://domain.com"
+    namespace="production"
   ```
 template file example :
-```
+```yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -96,13 +113,25 @@ spec:
         name: nginxhttp
         port: {{exposePort}}
 ```
-let says wi need quotes on namespace :
+let's say we need a quote in the namespace :
 ```bash
   crab -f inputfile.yaml -q namespace=production -r exposePort=8081 -o result.yaml -v
 ```
-yass you can silmutanly replacing multiple key value with quotes or not ✔️
+yass you can simultaneously Replace multiple key values with quotes or not  ✔️
 
-result will be
+result will be :
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+    name: nginx
+    namespace: "production"
+spec:
+    ports:
+      - targetPort: 80
+        name: nginxhttp
+        port: 8081
+```
 
 ## Related article
 - Replacing kubernetes manifest value dynamicly (coming soon)
