@@ -6,6 +6,12 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestAppendReplacableKV(t *testing.T) {
+	replacerKV := []ReplacableKV{}
+	addReplacableKv(&replacerKV, "hello=world", true)
+	assert.Equal(t, replacerKV[0].KV, "hello=world")
+}
+
 func TestReplace(t *testing.T) {
 
 	replacerKV := []ReplacableKV{}
