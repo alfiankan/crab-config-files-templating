@@ -24,15 +24,15 @@ func RootCLI() *cobra.Command {
 		Long:  `Crab CLI Dynamic configuration file templating tool for kubernetes manifest or general configuration files`,
 		Run: func(cmd *cobra.Command, args []string) {
 
-			var inputFilePath string
-			var outputFilePath string
-			var verbose bool
-			var errFlag error
-
-			inputFilePath, errFlag = cmd.Flags().GetString("file")
-			outputFilePath, errFlag = cmd.Flags().GetString("output")
-			verbose, errFlag = cmd.Flags().GetBool("verbose")
-
+			inputFilePath, errFlag := cmd.Flags().GetString("file")
+			if errFlag != nil {
+				fmt.Printf(redTemplate+" Something went wrong %s \n", "[ERROR]", errFlag.Error())
+			}
+			outputFilePath, errFlag := cmd.Flags().GetString("output")
+			if errFlag != nil {
+				fmt.Printf(redTemplate+" Something went wrong %s \n", "[ERROR]", errFlag.Error())
+			}
+			verbose, errFlag := cmd.Flags().GetBool("verbose")
 			if errFlag != nil {
 				fmt.Printf(redTemplate+" Something went wrong %s \n", "[ERROR]", errFlag.Error())
 			}
