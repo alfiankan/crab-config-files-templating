@@ -12,6 +12,13 @@ const (
 	redTemplate   = "\033[1;31m%s\033[0m"
 )
 
+func addReplacableKv(replaceKV *[]ReplacableKV, kv string, quotes bool) {
+	*replaceKV = append(*replaceKV, ReplacableKV{
+		KV:     kv,
+		Quotes: quotes,
+	})
+}
+
 // RootCLI main cli command
 func RootCLI() *cobra.Command {
 	var replaceKV []string
@@ -25,13 +32,9 @@ func RootCLI() *cobra.Command {
 		Run: func(cmd *cobra.Command, args []string) {
 
 			inputFilePath, errFlag := cmd.Flags().GetString("file")
-			if errFlag != nil {
-				fmt.Printf(redTemplate+" Something went wrong %s \n", "[ERROR]", errFlag.Error())
-			}
+
 			outputFilePath, errFlag := cmd.Flags().GetString("output")
-			if errFlag != nil {
-				fmt.Printf(redTemplate+" Something went wrong %s \n", "[ERROR]", errFlag.Error())
-			}
+
 			verbose, errFlag := cmd.Flags().GetBool("verbose")
 			if errFlag != nil {
 				fmt.Printf(redTemplate+" Something went wrong %s \n", "[ERROR]", errFlag.Error())
@@ -41,16 +44,10 @@ func RootCLI() *cobra.Command {
 				outputFilePath = inputFilePath
 			}
 			for _, v := range replaceKV {
-				replacableKV = append(replacableKV, ReplacableKV{
-					KV:     v,
-					Quotes: false,
-				})
+				addReplacableKv(&replacableKV, v, false)
 			}
 			for _, v := range replaceWithStringKV {
-				replacableKV = append(replacableKV, ReplacableKV{
-					KV:     v,
-					Quotes: true,
-				})
+				addReplacableKv(&replacableKV, v, false)
 			}
 
 			replacer := NewReplacer(inputFilePath, outputFilePath, false)
