@@ -8,11 +8,11 @@ import (
 
 // color TUI
 const (
-	GREEN_TEMPLATE = "\033[1;32m%s\033[0m"
-	RED_TEMPLATE   = "\033[1;31m%s\033[0m"
+	greenTemplate = "\033[1;32m%s\033[0m"
+	redTemplate   = "\033[1;31m%s\033[0m"
 )
 
-// main cli command
+// RootCLI main cli command
 func RootCLI() *cobra.Command {
 	var replaceKV []string
 	var replaceWithStringKV []string
@@ -29,7 +29,7 @@ func RootCLI() *cobra.Command {
 			verbose, errFlag := cmd.Flags().GetBool("verbose")
 
 			if errFlag != nil {
-				fmt.Printf(RED_TEMPLATE+" Something went wrong %s \n", "[ERROR]", errFlag.Error())
+				fmt.Printf(redTemplate+" Something went wrong %s \n", "[ERROR]", errFlag.Error())
 
 			}
 
@@ -51,16 +51,17 @@ func RootCLI() *cobra.Command {
 
 			replacer := NewReplacer(inputFilePath, outputFilePath, false)
 			if err := replacer.Run(replacableKV, verbose); err != nil {
-				fmt.Printf(RED_TEMPLATE+" Something went wrong %s \n", "[ERROR]", err.Error())
+				fmt.Printf(redTemplate+" Something went wrong %s \n", "[ERROR]", err.Error())
 			}
 			if verbose {
-				fmt.Printf(GREEN_TEMPLATE+" Crab output result at %s \n", "[DONE]", outputFilePath)
+				fmt.Printf(greenTemplate+" Crab output result at %s \n", "[DONE]", outputFilePath)
 			}
 
 		},
 	}
 
 	// set flag input
+	// grep flag input
 	rootCmd.Flags().StringP("file", "f", "", "Input File Path")
 	rootCmd.Flags().StringP("output", "o", "", "Output File Path")
 	rootCmd.Flags().BoolP("verbose", "v", false, "Verbose process")

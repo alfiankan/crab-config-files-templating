@@ -23,11 +23,6 @@ func TestReplace(t *testing.T) {
 		true,
 	)
 
-	t.Run("read config must be no error", func(t *testing.T) {
-		_, err := replacer.ReadFile()
-		assert.Nil(t, err)
-	})
-
 	t.Run("Read input file path to strin", func(t *testing.T) {
 		err := replacer.Run(replacerKV, true)
 		assert.Nil(t, err)

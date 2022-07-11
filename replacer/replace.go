@@ -6,17 +6,24 @@ import (
 	"strings"
 )
 
+// ReplacableKV hold key and value
+// key represent target template to be replaced
+// value represent next value
 type ReplacableKV struct {
 	KV     string
 	Quotes bool
 }
 
+// Replacer struct object for replace
+// inputPath => input file path
+// dryRun run without saving result
 type Replacer struct {
 	inputPath  string
 	outputPath string
 	dryRun     bool
 }
 
+// NewReplacer create new Replacer
 func NewReplacer(inputPath, outputPath string, dryRun bool) *Replacer {
 	return &Replacer{
 		inputPath,
@@ -25,14 +32,16 @@ func NewReplacer(inputPath, outputPath string, dryRun bool) *Replacer {
 	}
 }
 
-func (rep *Replacer) ReadFile() (string, error) {
+func (rep *Replacer) readFile() (string, error) {
 	content, err := os.ReadFile(rep.inputPath)
 	return string(content), err
 }
 
+// Run running replace process
+// will replace {{templateName}} format
 func (rep *Replacer) Run(kv []ReplacableKV, verbose bool) error {
 
-	content, err := rep.ReadFile()
+	content, err := rep.readFile()
 	if err != nil {
 		return err
 	}
@@ -46,7 +55,7 @@ func (rep *Replacer) Run(kv []ReplacableKV, verbose bool) error {
 		}
 		content = strings.ReplaceAll(content, fmt.Sprintf("{{%s}}", v[0]), newValue)
 		if verbose {
-			fmt.Printf(GREEN_TEMPLATE+" from %s to %s \n", "[REPLACED]", v[0], newValue)
+			fmt.Printf(greenTemplate+" from %s to %s \n", "[REPLACED]", v[0], newValue)
 		}
 	}
 
