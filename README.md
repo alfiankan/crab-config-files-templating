@@ -148,6 +148,60 @@ spec:
         port: 8081
 ```
 
+## Sample Github Action
+
+```yaml
+name: Demo deployment using crab
+
+on:
+  workflow_dispatch:
+
+jobs:
+  crab-manifest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: mock job
+        run: pwd
+
+  deploy-test:
+    runs-on: ubuntu-latest
+    needs: crab-manifest
+    steps:
+      - uses: actions/checkout@v3
+      - name: install crab cli
+        run: wget -c https://github.com/alfiankan/crab-config-files-templating/releases/download/v1.0.5/crab-v1.0.5-linux-amd64.tar.gz -O - | tar -xz crab
+      - name: recreate deployment manifest on test
+        run: |
+          ./crab -f example/manifest/nginx.yaml \
+          -r namespace=test \
+          -r publishPort=8000 \
+          -q portName=test-server \
+          -o nginx-test.yaml \
+          -v
+      - name: view manifest
+        run: cat nginx-test.yaml
+                    
+  
+  deploy-production:
+    runs-on: ubuntu-latest
+    needs: crab-manifest
+    steps:
+      - uses: actions/checkout@v3
+      - name: install crab cli
+        run: wget -c https://github.com/alfiankan/crab-config-files-templating/releases/download/v1.0.5/crab-v1.0.5-linux-amd64.tar.gz -O - | tar -xz crab
+      - name: recreate deployment manifest on production
+        run: |
+          ./crab -f example/manifest/nginx.yaml \
+          -r namespace=production \
+          -r publishPort=80 \
+          -q portName=prod-server \
+          -o nginx-prod.yaml \
+          -v
+      - name: view manifest
+        run: cat nginx-prod.yaml
+```
+
 ## Related article
 - Replacing kubernetes manifest value dynamicly (coming soon on medium)
 
